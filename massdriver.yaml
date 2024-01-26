@@ -1,0 +1,60 @@
+# This file will be used to generate all of the schema-*.json files in a bundle
+schema: draft-07
+name: "aws-batch"
+description: "aws-batch-job"
+source_url: github.com/YOUR_NAME_HERE/aws-batch
+access: private
+type: ""
+
+# schema-params.json
+# JSON Schema sans-fields above
+params:
+  # Examples will show up as configuration presets in the UI _and_
+  # they will be used to test configurations of the bundle.
+  examples:
+    - __name: Development
+      foo: bar
+    - __name: Production
+      foo: foo
+  required:
+    - foo
+  properties:
+    foo:
+      type: string
+      title: Foo
+      description: Name of aws-batch
+      default: ""
+      examples:
+        - US-West 2 VPC
+        - US-East 1 VPC
+
+
+# schema-connections.json
+# Named list of input connections (artifacts) (map[name]artifact)
+connections:
+  required:
+  - ecs_cluster
+  - s3_bucket
+  properties:
+    ecs_cluster:
+      $ref: massdriver/aws-ecs-cluster
+    s3_bucket:
+      $ref: massdriver/aws-s3-bucket
+
+
+# schema-artifacts.json
+# Named list of output artifacts  (map[name]artifact)
+artifacts:
+  properties: {}
+  # required:
+  #   - network
+  # properties:
+  #   network:
+  #     $ref: massdriver/aws-vpc
+
+# schema-ui.json
+# List of form customizations for params-schema
+# learn more about widgets & fields: https://docs.massdriver.cloud/bundles/custom-widgets-and-fields
+ui:
+  ui:order:
+    - "*"
